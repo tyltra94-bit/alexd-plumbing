@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex D Plumbing — San Gabriel Valley & Greater LA</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@500;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:   #0f1923;
+  --steel:  #1e2d3d;
+  --pipe:   #2e4a63;
+  --copper: #c17f3e;
+  --water:  #4a9eca;
+  --light:  #f0f4f8;
+  --white:  #ffffff;
+  --text:   #1a2530;
+  --muted:  #6b7c8d;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(15, 25, 35, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  border-bottom: 1px solid rgba(196, 127, 62, 0.2);
+}
+
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+.nav-logo span { color: var(--copper); }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--copper); }
+
+.nav-cta {
+  background: var(--copper);
+  color: var(--white);
+  padding: 10px 22px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: #a86c30; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  padding: 100px 5% 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pipe grid background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(196,127,62,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(196,127,62,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(transparent, var(--white));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(196,127,62,0.12);
+  border: 1px solid rgba(196,127,62,0.3);
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--copper);
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--copper);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(44px, 7vw, 76px);
+  font-weight: 700;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+.hero h1 .accent { color: var(--copper); }
+
+.hero p {
+  font-size: 18px;
+  color: rgba(255,255,255,0.65);
+  max-width: 480px;
+  margin-bottom: 40px;
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--copper);
+  color: var(--white);
+  padding: 16px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.2s, transform 0.1s;
+}
+.btn-primary:hover { background: #a86c30; transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--white);
+  padding: 16px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: border-color 0.2s;
+}
+.btn-secondary:hover { border-color: rgba(255,255,255,0.6); }
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.stat-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 4px;
+  font-weight: 400;
+}
+
+/* ── SERVICES ── */
+.services {
+  padding: 80px 5%;
+  background: var(--white);
+}
+
+.section-header {
+  margin-bottom: 48px;
+}
+.section-header h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+.section-header p {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 500px;
+  font-weight: 300;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2px;
+  background: #e8ecf0;
+  border: 2px solid #e8ecf0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.service-card {
+  background: var(--white);
+  padding: 36px 32px;
+  transition: background 0.2s;
+}
+.service-card:hover { background: var(--light); }
+
+.service-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+.service-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.service-card p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ── WHY ALEX ── */
+.why {
+  padding: 80px 5%;
+  background: var(--navy);
+  position: relative;
+}
+
+.why h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 48px;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+}
+
+.why-item {
+  border-left: 2px solid var(--copper);
+  padding-left: 20px;
+}
+.why-item h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.why-item p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+}
+
+/* ── SERVICE AREA ── */
+.area {
+  padding: 80px 5%;
+  background: var(--light);
+}
+
+.area h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 32px;
+}
+
+.area-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.area-chip {
+  background: var(--white);
+  border: 1px solid #d0d8e0;
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 14px;
+  color: var(--steel);
+  font-weight: 500;
+}
+
+.area-chip.main {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+
+/* ── CONTACT FORM ── */
+.contact {
+  padding: 80px 5%;
+  background: var(--white);
+}
+
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+  max-width: 1000px;
+}
+
+@media (max-width: 768px) {
+  .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .nav-links { display: none; }
+  .hero-stats { gap: 28px; }
+}
+
+.contact-info h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+.contact-info p {
+  font-size: 16px;
+  color: var(--muted);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 15px;
+  color: var(--text);
+}
+.contact-detail .icon {
+  width: 36px; height: 36px;
+  background: var(--light);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+/* Response time badge */
+.response-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font-size: 13px;
+  color: #2e7d32;
+  font-weight: 500;
+  margin-top: 24px;
+}
+
+/* Form */
+.form-card {
+  background: var(--light);
+  border-radius: 8px;
+  padding: 36px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--steel);
+  margin-bottom: 6px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #d0d8e0;
+  border-radius: 4px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--copper);
+}
+.form-group textarea { resize: vertical; min-height: 100px; }
+
+.form-submit {
+  width: 100%;
+  background: var(--copper);
+  color: var(--white);
+  border: none;
+  padding: 16px;
+  border-radius: 4px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: #a86c30; }
+
+/* ── SUCCESS STATE ── */
+.success-state {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+.success-state.show { display: block; }
+.success-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+.success-state h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.success-state p {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+.success-sms {
+  margin-top: 24px;
+  background: #f0f7ff;
+  border: 1px solid #b3d4f0;
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  color: #1a4a7a;
+  text-align: left;
+}
+.success-sms .sms-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.sms-bubble {
+  background: #0b93f6;
+  color: white;
+  padding: 12px 16px;
+  border-radius: 18px 18px 4px 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 280px;
+}
+.whatsapp-alert {
+  margin-top: 12px;
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: #2e5c32;
+  line-height: 1.6;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  padding: 32px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--white);
+}
+.footer-logo span { color: var(--copper); }
+footer p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+}
+.footer-license {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  text-align: right;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Alex <span>D</span> Plumbing</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#area">Service Area</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Free Quote</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Licensed C-36 Contractor · Southern California</div>
+    <h1>Residential<br>Plumbing Done<br><span class="accent">Right.</span></h1>
+    <p>Serving the San Gabriel Valley, the Valley, and Downtown LA. Licensed, insured, and available when you need it.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">📋 Request a Quote</a>
+      <a href="tel:+18185550000" class="btn-secondary">📞 Call Now</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">15 sec</div>
+        <div class="stat-label">Average response time</div>
+      </div>
+      <div>
+        <div class="stat-val">SGV · Valley · DTLA</div>
+        <div class="stat-label">Service areas</div>
+      </div>
+      <div>
+        <div class="stat-val">5★</div>
+        <div class="stat-label">Google rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header">
+    <h2>What we handle</h2>
+    <p>Residential plumbing across the greater LA area — from routine fixes to full repipes.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🚰</div>
+      <h3>Leak Detection & Repair</h3>
+      <p>Hidden leaks found fast. Wall, slab, and pipe leaks diagnosed and fixed without unnecessary demolition.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🚿</div>
+      <h3>Drain Cleaning</h3>
+      <p>Slow or clogged drains cleared the right way. Kitchen, bathroom, and main line services available.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔧</div>
+      <h3>Fixture Installation</h3>
+      <p>Faucets, toilets, water heaters, garbage disposals — installed and tested to manufacturer specs.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💧</div>
+      <h3>Water Heater Service</h3>
+      <p>Tank and tankless water heater installation, repair, and replacement. Same-day service available.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏠</div>
+      <h3>Repiping</h3>
+      <p>Full and partial home repiping in copper and PEX. Priced honestly with no hidden charges.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚡</div>
+      <h3>Emergency Calls</h3>
+      <p>Burst pipes and active leaks don't wait. Call directly for urgent situations requiring same-day response.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ALEX -->
+<section class="why">
+  <h2>Why homeowners choose Alex D</h2>
+  <div class="why-grid">
+    <div class="why-item">
+      <h4>You hear back in seconds</h4>
+      <p>Submit a quote request and get a text confirmation immediately — not hours later.</p>
+    </div>
+    <div class="why-item">
+      <h4>Flat pricing, no surprises</h4>
+      <p>You get a written quote before any work begins. The price you're quoted is the price you pay.</p>
+    </div>
+    <div class="why-item">
+      <h4>Licensed & insured</h4>
+      <p>California C-36 licensed plumbing contractor. Fully insured on every job, residential and commercial.</p>
+    </div>
+    <div class="why-item">
+      <h4>Clean workmanship</h4>
+      <p>Work areas left cleaner than found. No shortcuts, no callbacks — done right the first time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="area" id="area">
+  <h2>Service area</h2>
+  <div class="area-chips">
+    <span class="area-chip main">San Gabriel Valley</span>
+    <span class="area-chip main">The Valley</span>
+    <span class="area-chip main">Downtown LA</span>
+    <span class="area-chip">Pasadena</span>
+    <span class="area-chip">Alhambra</span>
+    <span class="area-chip">Monterey Park</span>
+    <span class="area-chip">San Gabriel</span>
+    <span class="area-chip">Temple City</span>
+    <span class="area-chip">Arcadia</span>
+    <span class="area-chip">Burbank</span>
+    <span class="area-chip">Glendale</span>
+    <span class="area-chip">Van Nuys</span>
+    <span class="area-chip">North Hollywood</span>
+    <span class="area-chip">Sherman Oaks</span>
+    <span class="area-chip">Silver Lake</span>
+    <span class="area-chip">Echo Park</span>
+    <span class="area-chip">and surrounding areas</span>
+  </div>
+  <p style="font-size:14px;color:var(--muted);">Not sure if we cover your area? Fill out the form and we'll let you know.</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <h2>Get a free quote — today</h2>
+      <p>Fill out the form and you'll hear back within 15 seconds. No waiting, no phone tag.</p>
+
+      <div class="contact-detail">
+        <div class="icon">📞</div>
+        <span>(818) 555-0000</span>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">📍</div>
+        <span>San Gabriel Valley & Greater LA</span>
+      </div>
+      <div class="contact-detail">
+        <div class="icon">🕐</div>
+        <span>Mon–Sat 7am–7pm · Emergency calls accepted</span>
+      </div>
+
+      <div class="response-badge">
+        ⚡ Average response time: under 15 seconds
+      </div>
+    </div>
+
+    <div class="form-card" id="formCard">
+      <form id="quoteForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First name</label>
+            <input type="text" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label>Last name</label>
+            <input type="text" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone number</label>
+          <input type="tel" placeholder="(818) 555-0000" required>
+        </div>
+        <div class="form-group">
+          <label>Service address</label>
+          <input type="text" placeholder="123 Main St, Pasadena, CA" required>
+        </div>
+        <div class="form-group">
+          <label>What do you need help with?</label>
+          <select required>
+            <option value="" disabled selected>Select a service</option>
+            <option>Leak detection or repair</option>
+            <option>Drain cleaning</option>
+            <option>Water heater service</option>
+            <option>Fixture installation</option>
+            <option>Repiping</option>
+            <option>Emergency — active leak</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us more (optional)</label>
+          <textarea placeholder="Describe the issue — when did it start, what you've noticed, any urgency..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send my request — get a text in seconds</button>
+      </form>
+
+      <div class="success-state" id="successState">
+        <div class="success-icon">✅</div>
+        <h3>Request received, John!</h3>
+        <p>Check your phone — a confirmation text just went out.</p>
+        <p style="font-size:13px;color:#999;margin-top:4px;">Alex will follow up within the hour to confirm timing.</p>
+
+        <div class="success-sms">
+          <div class="sms-label">📱 SMS sent to customer</div>
+          <div class="sms-bubble">
+            Hi John! Thanks for reaching out to Alex D Plumbing. We got your request for drain cleaning at 123 Main St. Alex will call you within the hour to confirm. Questions? Reply to this text.
+          </div>
+        </div>
+
+        <div class="whatsapp-alert">
+          <strong>💬 WhatsApp alert sent to Alex:</strong><br>
+          🚨 New lead: John Smith<br>
+          📍 123 Main St, Pasadena CA<br>
+          🔧 Drain cleaning<br>
+          📞 (818) 555-0000<br>
+          <em style="font-size:12px;opacity:0.7;">Reply CALL to dial · DONE to log job complete</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Alex <span>D</span> Plumbing</div>
+  <p>© 2026 Alex D Plumbing. All rights reserved.</p>
+  <div class="footer-license">California C-36 Licensed · Fully Insured</div>
+</footer>
+
+<script>
+document.getElementById('quoteForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  // Get first name for personalization
+  const firstName = this.querySelector('input[placeholder="John"]').value || 'there';
+  const address = this.querySelector('input[placeholder="123 Main St, Pasadena, CA"]').value || '123 Main St';
+  const service = this.querySelector('select').value || 'your plumbing request';
+
+  // Update success message with real form data
+  const successState = document.getElementById('successState');
+  successState.querySelector('h3').textContent = `Request received, ${firstName}!`;
+  successState.querySelector('.sms-bubble').textContent =
+    `Hi ${firstName}! Thanks for reaching out to Alex D Plumbing. We got your request for ${service.toLowerCase()} at ${address}. Alex will call you within the hour to confirm. Questions? Reply to this text.`;
+
+  successState.querySelector('.whatsapp-alert').innerHTML =
+    `<strong>💬 WhatsApp alert sent to Alex:</strong><br>
+    🚨 New lead: ${firstName}<br>
+    📍 ${address}<br>
+    🔧 ${service}<br>
+    📞 Number on file<br>
+    <em style="font-size:12px;opacity:0.7;">Reply CALL to dial · DONE to log job complete</em>`;
+
+  // Show success
+  this.style.display = 'none';
+  successState.classList.add('show');
+
+  // Scroll to success
+  successState.scrollIntoView({ behavior: 'smooth', block: 'center' });
+});
+</script>
+
+</body>
+</html>
